@@ -29,7 +29,7 @@ stages
    stage ("git")
       {
        steps {
-           git branch : 'main', credential id : 'github' , url : "https://github.com/rahul-santosh7/Java-pipeline/tree/main
+           git branch : 'main', credential id : 'github' , url : "https://github.com/gaddharaju/Java-pipeline/tree/main)"
            }
         }
    stage (" Building using maven")
