@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: updated
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-oldcode   # label should be same
+  template:
+   metadata:
+    labels:
+      app: nginx-oldcode    # label should be same
+   spec:
+    containers:
+    - name: nginx-container
+      image: rahulsantosh13/javaapp:1.0.0-32
+      ports:
+      - containerPort: 8080
+      resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 50m
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: my-service
+spec:
+ type: LoadBalancer
+ selector:
+   app: nginx-oldcode  # label should be same
+ ports:
+   - name: http-port
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+
+
